@@ -6,7 +6,7 @@ function muestroCarrito()
     main.innerHTML = "";
 
     if(carrito.length === 0) 
-        main.innerHTML =`<p id="texto-vacio"> Tu carrito está vacio</p>`
+         main.innerHTML = `<p id="texto-vacio">Your cart is empty:</p>`;
 
     const contenedor = document.createElement("div")
     contenedor.classList.add("carrito-contenedor")
@@ -18,9 +18,7 @@ function muestroCarrito()
         const productoEnHTML = document.createElement("div")
         productoEnHTML.classList.add("carrito-producto")
         
-        productoEnHTML.innerHTML = `<img src =".${producto.imagen}" alt="${
-          producto.nombre
-        }" class="carrito-imagen"/>
+        productoEnHTML.innerHTML = `<img src =".${producto.imagen}" alt="${producto.nombre}" class="carrito-imagen"</>
                                     <div class = "producto-info">
                                         <div class = "producto-titulo">
                                             <h3>${producto.nombre}</h3>    
@@ -32,7 +30,7 @@ function muestroCarrito()
                                                 <p>${producto.cantidad}</p>
                                                 <button class = "restar" data-id="${producto.id}">-</button>
                                             </div>
-                                            <p class = "precio">Precio: $${producto.precio}</p>
+                                            <p class = "precio">Price: $${producto.precio}</p>
                                             <p class = "subtotal">Subtotal: $${producto.precio * producto.cantidad}</p>
                                         </div>
                                     </div>
@@ -44,7 +42,7 @@ function muestroCarrito()
     }
 
     const totalEnHTML = document.createElement("h2")
-    totalEnHTML.innerText = `Total a pagar: $${total}`
+    totalEnHTML.innerText = `Total to pay: $${total}`;
     contenedor.appendChild(totalEnHTML)
 
     main.appendChild(contenedor)

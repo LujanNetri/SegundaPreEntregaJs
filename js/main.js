@@ -49,19 +49,19 @@ function imprimoProductosHTML(productos)
 
     for(const producto of productos)
     {
-        const card = document.createElement("div")
-        card.classList.add("card")
+      const card = document.createElement("div")
+      card.classList.add("card")
 
-        card.innerHTML = `<img src="${producto.imagen}" alt= "${producto.nombre} class="producto-img"</>
+      card.innerHTML = `<img src="${producto.imagen}" alt= "${producto.nombre} class="producto-img"</>
         <p>${producto.categoria}</p>
         <h3>${producto.nombre}</h3>
         <p>$${producto.precio}</p>
-        <button id="btn-${producto.id}" class="btn-comprar"> Añadir al Carrito</button>`;
+        <button id="btn-${producto.id}" class="btn-comprar">Add to cart</button>`;
 
-        contenedor.appendChild(card)
+      contenedor.appendChild(card)
 
-        const boton = document.getElementById(`btn-${producto.id}`)
-        boton.addEventListener("click", () => agregaAlCarrito(producto))
+      const boton = document.getElementById(`btn-${producto.id}`)
+      boton.addEventListener("click", () => agregaAlCarrito(producto))
     }
 }
 
@@ -69,38 +69,37 @@ let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 function agregaAlCarrito(producto)
 {
-    const productoEnCarrito = carrito.find( productoABuscar => productoABuscar.id === producto.id)
+  const productoEnCarrito = carrito.find( productoABuscar => productoABuscar.id === producto.id)
 
-    if(productoEnCarrito)
-        productoEnCarrito.cantidad++
-    else 
+  if(productoEnCarrito)
+    productoEnCarrito.cantidad++
+  else 
+  {
+    let productoNuevo = 
     {
-        let productoNuevo = 
-        {
-            id:producto.id,
-            nombre: producto.nombre,
-            categoria: producto.categoria,
-            precio:producto.precio,
-            imagen: producto.imagen,
-            cantidad:1
-        }
-        carrito.push(productoNuevo)
+      id:producto.id,
+      nombre: producto.nombre,
+      categoria: producto.categoria,
+      precio:producto.precio,
+      imagen: producto.imagen,
+      cantidad:1
     }
+    carrito.push(productoNuevo)
+  }
     
-    localStorage.setItem("carrito",JSON.stringify(carrito))
-    actualizoContadorCarrito();
+  localStorage.setItem("carrito",JSON.stringify(carrito))
+  actualizoContadorCarrito();
 }
 
 function actualizoContadorCarrito()
 {
-    const contador = document.getElementById("carrito-contador");
-    let total = 0
+  const contador = document.getElementById("carrito-contador");
+  let total = 0
 
-    for(const producto of carrito)
-        total+=producto.cantidad
+  for(const producto of carrito)
+    total+=producto.cantidad
     
-
-    contador.innerText = total
+  contador.innerText = total
 }
 
 imprimoProductosHTML(productos)
